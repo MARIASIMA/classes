@@ -4,7 +4,7 @@ import random
 class Persona:
     def __init__(self, nombre, año_nacimiento, mes_nacimiento, dia_nacimiento, lugar_nacimiento, sexo):
         self.nombre = nombre
-        self.año_nacimiento = self.año_nacimiento
+        self.año_nacimiento = año_nacimiento
         self.mes_nacimiento = mes_nacimiento
         self.dia_nacimiento = dia_nacimiento
         self.lugar_nacimiento = lugar_nacimiento
@@ -20,7 +20,7 @@ class Persona:
             return 2025 - self.año_nacimiento
     
     def saludar(self):
-        return "Hola, soy " + self.nombre + "y tengo " + str(self.calcular_edad_en_años()) + " años"
+        return "Hola, soy " + self.nombre + " y tengo " + str(self.calcular_edad_en_años()) + " años"
     
     def calcular_edad_en_meses(self):
         edad_en_meses = self.calcular_edad_en_años() * 12 + (self.mes_nacimiento - 2)
@@ -94,7 +94,7 @@ if __name__ == "__main__":
             break
         elif accion == 'a':
             nombre = input("Ingrese el nombre de la persona: ")
-            año_nacimiento = int(input("añade el año de nacimiento: "))
+            año_nacimiento = int(input("Ingrese el año de nacimiento: "))
             mes_nacimiento = int(input("Ingrese el mes de nacimiento: "))
             dia_nacimiento = int(input("Ingrese el día de nacimiento: "))
             lugar_nacimiento = input("Ingrese el lugar de nacimiento: ")
