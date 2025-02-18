@@ -1,15 +1,17 @@
 import math
+import random
 
 class Persona:
     def __init__(self, nombre, año_nacimiento, mes_nacimiento, dia_nacimiento, lugar_nacimiento, sexo):
         self.nombre = nombre
-        self.año_nacimiento = self.año_nacimiento
+        self.año_nacimiento = año_nacimiento
         self.mes_nacimiento = mes_nacimiento
         self.dia_nacimiento = dia_nacimiento
         self.lugar_nacimiento = lugar_nacimiento
         self.sexo = sexo
         self.x = 0
         self.y = 0
+        self.monedas = 0
         
     def calcular_edad_en_años(self):
         if self.mes_nacimiento >=2:
@@ -34,10 +36,15 @@ class Persona:
         self.y = nueva_y
         return f"Me he movido a la nueva ubicación: ({self.x}, {self.y})"
 
+    def agregar_monedas(self, cantidad):
+        self.monedas += cantidad
+        return f"{self.nombre} ahora tiene {self.monedas} monedas"
+
 class Espacio:
     def __init__(self, nombre):
         self.nombre = nombre
         self.personas = []
+        self.monedas = []
 
     def agregar_persona(self, persona):
         self.personas.append(persona)
@@ -48,6 +55,15 @@ class Espacio:
             return f"No hay personas en el espacio {self.nombre}"
         return f"Personas en el espacio {self.nombre}: " + ", ".join([persona.nombre for persona in self.personas])
 
+    def repartir_monedas(self, cantidad):
+        for persona in self.personas:
+            monedas_a_repartir = random.randint(1, cantidad)
+            persona.agregar_monedas(monedas_a_repartir)
+            cantidad -= monedas_a_repartir
+            if cantidad <= 0:
+                break
+        return f"Se han repartido monedas en el espacio {self.nombre}"
+    
 def calcular_distancia(persona1, persona2):
     return math.sqrt((persona1.x - persona2.x) ** 2 + (persona1.y - persona2.y) ** 2)
 
@@ -78,3 +94,7 @@ if __name__ == "__main__":
             print(espacio.listar_personas())
         else:
             print("Opción no válida. Por favor, elija 'a', 'l' o 's'.")
+
+class Moneda:
+    def __init__(self, valor):
+        self.valor = valor
