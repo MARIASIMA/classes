@@ -64,6 +64,18 @@ class Espacio:
                 break
         return f"Se han repartido monedas en el espacio {self.nombre}"
 
+    def agregar_moneda(self, moneda):
+        self.monedas.append(moneda)
+        return f"Se ha añadido una moneda de valor {moneda.valor} al espacio {self.nombre}"
+
+    def mover_personas_n_turnos(self, n):
+        for _ in range(n):
+            for persona in self.personas:
+                nueva_x = random.randint(0, 100)
+                nueva_y = random.randint(0, 100)
+                persona.mover_a(nueva_x, nueva_y)
+        return f"Las personas se han movido {n} turnos en el espacio {self.nombre}"
+
 class Moneda:
     def __init__(self, valor=1):
         self.valor = valor
@@ -104,4 +116,3 @@ if __name__ == "__main__":
             print(espacio.repartir_monedas(cantidad))
         else:
             print("Opción no válida. Por favor, elija 'a', 'l', 'm', 'r' o 's'.")
-
